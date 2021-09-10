@@ -1,0 +1,81 @@
+1. Membuat Database
+CREATE Database myshop;
+
+2. Membuat Table di Dalam Database
+CREATE TABLE `myshop`.`users`
+(
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `myshop`.`categories`
+(
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `myshop`.`items`
+(
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`description` VARCHAR(255) NOT NULL,
+	`price` INT NOT NULL,
+	`stock` INT NOT NULL,
+	`category_id` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `items`
+	ADD CONSTRAINT `fk1`
+	FOREIGN KEY (`category_id`)
+	REFERENCES `categories`(`id`)
+	ON DELETE CASCADE ON UPDATE CASCADE;	
+
+3. Memasukkan Data pada Table
+INSERT INTO `users` (`id`, `name`, `email`, `password`)
+	VALUES
+		(NULL, 'John Doec', 'john@doe.com', 'john123'),
+		(NULL, 'Jane Doe', 'jane@doe.com', 'jenita123');
+
+INSERT INTO `categories` (`id`, `name`)
+	VALUES
+		(NULL, 'gadget'),
+		(NULL, 'cloth'),
+		(NULL, 'men'),
+		(NULL, 'women'),
+		(NULL, 'branded');
+
+INSERT INTO `items` (`id`, `name`, `description`, `price`, `stock`, `category_id`)
+	VALUES
+		(NULL, 'Sumsang B50', 'Hape keren dari merek Sumsang', '4000000', '100', '1'),
+		(NULL, 'Uniklooh', 'Baju keren dari brand ternama', '500000', '50', '2'),
+		(NULL, 'IMHO Watch', 'Jam tangan anak yang jujur banget	', '2000000', '10', '1');
+
+4. Mengambil Data dari Database
+	a. Mengambil data users
+	SELECT `id`, `name`, `email`
+		FROM `users`;
+	
+	b. Mengambil data items
+	SELECT *
+		FROM `items`
+		WHERE `price` >= 1000000;
+
+	SELECT *
+		FROM `items`
+		WHERE `name` LIKE '%uniklo%';
+
+	c. Menampilkan data items join dengan kategori
+	SELECT items.*, categories.name
+		FROM `items`
+		LEFT JOIN `categories`
+		ON items.category_id = categories.id;
+
+5. Mengubah Data dari Database
+UPDATE `items`
+	SET `price` = '2500000'
+	WHERE `items`.`id` = 1;
