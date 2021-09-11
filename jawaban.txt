@@ -38,7 +38,7 @@ ALTER TABLE `items`
 3. Memasukkan Data pada Table
 INSERT INTO `users` (`id`, `name`, `email`, `password`)
 	VALUES
-		(NULL, 'John Doec', 'john@doe.com', 'john123'),
+		(NULL, 'John Doe', 'john@doe.com', 'john123'),
 		(NULL, 'Jane Doe', 'jane@doe.com', 'jenita123');
 
 INSERT INTO `categories` (`id`, `name`)
